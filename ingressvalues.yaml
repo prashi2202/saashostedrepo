@@ -1,0 +1,32 @@
+rbac:
+  create: true
+
+controller:
+  config:
+    use-forwarded-headers: "true"
+    compute-full-forwarded-for: "true"
+    use-proxy-protocol: "true"
+  publishService:
+    enabled: true
+  replicaCount: 1
+  minAvailable: 1
+  autoscaling:
+    enabled: false
+    minReplicas: 3
+    maxReplicas: 6
+    targetCPUUtilizationPercentage: 50
+    targetMemoryUtilizationPercentage: 50
+  # Octavia config
+  config:
+    use-forwarded-headers: "true"
+    compute-full-forwarded-for: "true"
+    use-proxy-protocol: "true"
+  service:
+    enabled: true
+  spec:
+   type: LoadBalancer
+   externalIPs:
+   - 10.54.106.137
+   annotations:
+      loadbalancer.openstack.org/keep-floatingip: true
+      loadbalancer.openstack.org/proxy-protocol: "true"
